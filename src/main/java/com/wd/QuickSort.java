@@ -71,6 +71,6 @@ public class QuickSort {
 			}
 		}
 		a[l]=base+a[l];
-		return l;
+		return l+1;
 	}
 }
