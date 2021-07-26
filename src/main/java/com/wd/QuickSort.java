@@ -44,7 +44,7 @@ public class QuickSort {
 		quickSort(a,l+1,right);
 	}
 	//随机选取基准数
-	public static int quickSort1(int[] a,int left,int right){
+	public static void quickSort1(int[] a,int left,int right){
 //		if(a==null || a.length<2 || left>=right){
 //			return;
 //		}
@@ -71,6 +71,6 @@ public class QuickSort {
 			}
 		}
 		a[l]=base+a[l];
-		return l;
+		//return l;
 	}
 }
