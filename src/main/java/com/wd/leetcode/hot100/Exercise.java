@@ -33,7 +33,30 @@ public class Exercise {
         return res.toArray(new int[res.size()][]);
     }
 
+    //    输入: nums = [1,2,3,4,5,6,7], k = 3
+    //    输出: [5,6,7,1,2,3,4]
+    //    解释:
+    //    向右轮转 1 步: [7,1,2,3,4,5,6]
+    //    向右轮转 2 步: [6,7,1,2,3,4,5]
+    //    向右轮转 3 步: [5,6,7,1,2,3,4]
+    public static void rotate(int[] nums, int k) {
+        int length = nums.length;
+        k = k % length;
+        reverse(nums, 0, length - 1);//先反转全部的元素
+        reverse(nums, 0, k - 1);//在反转前k个元素
+        reverse(nums, k, length - 1);//接着反转剩余的
+    }
+
+    //把数组中从[start，end]之间的元素两两交换,也就是反转
+    public static void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start++] = nums[end];
+            nums[end--] = temp;
+        }
+    }
+
     public static void main(String[] args) {
-        merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}});
+        rotate(new int[]{1, 2, 3, 4, 5, 6}, 1);
     }
 }
