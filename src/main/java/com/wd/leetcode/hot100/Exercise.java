@@ -56,7 +56,22 @@ public class Exercise {
         }
     }
 
+    public static int[] productExceptSelf(int[] nums) {
+        int length = nums.length;
+        int[] answer = new int[length];
+        answer[0] = 1;
+        for (int i = 1; i < length; i++) {
+            answer[i] = answer[i - 1] * nums[i - 1];
+        }
+        int rightRes = 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            answer[i] = answer[i] * rightRes;
+            rightRes = rightRes * nums[i];
+        }
+        return answer;
+    }
+
     public static void main(String[] args) {
-        rotate(new int[]{1, 2, 3, 4, 5, 6}, 1);
+        System.out.println(Arrays.toString(productExceptSelf(new int[]{1, 2, 3, 4, 5, 6})));
     }
 }
