@@ -1,8 +1,6 @@
 package com.wd.leetcode.hot100;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Exercise {
 
@@ -71,7 +69,24 @@ public class Exercise {
         return answer;
     }
 
+    public static int firstMissingPositive(int[] nums) {
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            while (nums[i] > 0 && nums[i] <= length && nums[nums[i] - 1] != nums[i]) {
+                int temp = nums[nums[i] - 1];
+                nums[nums[i] - 1] = nums[i];
+                nums[i] = temp;
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i + 1) {
+                return i + 1;
+            }
+        }
+        return length + 1;
+    }
+
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(productExceptSelf(new int[]{1, 2, 3, 4, 5, 6})));
+        System.out.println(firstMissingPositive(new int[]{100000, 3, 4000, 2, 15, 1, 99999}));
     }
 }
