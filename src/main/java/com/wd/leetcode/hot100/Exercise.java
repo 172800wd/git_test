@@ -130,8 +130,67 @@ public class Exercise {
         }
     }
 
+    public static List<Integer> spiralOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) {
+            return new ArrayList<>();
+        }
+        int top = 0;
+        int bottom = matrix.length - 1;
+        int left = 0;
+        int right = matrix[0].length - 1;
+        List<Integer> res = new ArrayList<>();
+        int i = 0, j = 0;
+        int direction = 0;
+        loop:
+        while (left <= right && top <= bottom) {
+            res.add(matrix[i][j]);
+            switch (direction) {
+                case 0: {
+                    if (j == right) {
+                        direction = 1;
+                        top++;
+                        i++;
+                    } else {
+                        j++;
+                    }
+                    break;
+                }
+                case 1: {
+                    if (i == bottom) {
+                        direction = 2;
+                        right--;
+                        j--;
+                    } else {
+                        i++;
+                    }
+                    break;
+                }
+                case 2: {
+                    if (j == left) {
+                        direction = 3;
+                        bottom--;
+                        i--;
+                    } else {
+                        j--;
+                    }
+                    break;
+                }
+                case 3: {
+                    if (i == top) {
+                        direction = 0;
+                        left++;
+                        j++;
+                    } else {
+                        i--;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        setZeroes(new int[][]{
+        List<Integer> list = spiralOrder(new int[][]{
                 {0, 1, 2, 0},
                 {3, 4, 5, 6},
                 {7, 8, 9, 1}
