@@ -141,7 +141,6 @@ public class Exercise {
         List<Integer> res = new ArrayList<>();
         int i = 0, j = 0;
         int direction = 0;
-        loop:
         while (left <= right && top <= bottom) {
             res.add(matrix[i][j]);
             switch (direction) {
@@ -183,6 +182,7 @@ public class Exercise {
                     } else {
                         i--;
                     }
+                    break;
                 }
             }
         }
