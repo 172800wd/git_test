@@ -139,30 +139,25 @@ public class Exercise {
         int left = 0;
         int right = matrix[0].length - 1;
         List<Integer> res = new ArrayList<>();
-        int i = 0, j = 0;
-        int[][] direction = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        int step = 1;
-        int currentDirection = 0;
-        while (res.size() < matrix.length * matrix[0].length) {
-            res.add(matrix[i][j]);
-            int nextI = i + direction[currentDirection][0];
-            int nextJ = j + direction[currentDirection][1];
-            if (nextI > bottom || nextI < top || nextJ > right || nextJ < left) {
-                if (currentDirection == 0) {
-                    top++;
-                } else if (currentDirection == 1) {
-                    right--;
-                } else if (currentDirection == 2) {
-                    bottom--;
-                } else if (currentDirection == 3) {
-                    left++;
-                }
-                currentDirection = (currentDirection + 1) % direction.length;
-                nextI = i + step * direction[currentDirection][0];
-                nextJ = j + step * direction[currentDirection][1];
+        while (left <= right && top <= bottom) {
+            for (int row = left; row <= right; row++) {
+                res.add(matrix[top][row]);
             }
-            i = nextI;
-            j = nextJ;
+            for (int col = top + 1; col <= bottom; col++) {
+                res.add(matrix[col][right]);
+            }
+            if (left < right && top < bottom) {
+                for (int col = right - 1; col >= left; col--) {
+                    res.add(matrix[bottom][col]);
+                }
+                for (int row = bottom - 1; row > top; row--) {
+                    res.add(matrix[row][left]);
+                }
+            }
+            top++;
+            bottom--;
+            left++;
+            right--;
         }
         return res;
     }
