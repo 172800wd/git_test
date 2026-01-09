@@ -140,51 +140,29 @@ public class Exercise {
         int right = matrix[0].length - 1;
         List<Integer> res = new ArrayList<>();
         int i = 0, j = 0;
-        int direction = 0;
-        while (left <= right && top <= bottom) {
+        int[][] direction = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int step = 1;
+        int currentDirection = 0;
+        while (res.size() < matrix.length * matrix[0].length) {
             res.add(matrix[i][j]);
-            switch (direction) {
-                case 0: {
-                    if (j == right) {
-                        direction = 1;
-                        top++;
-                        i++;
-                    } else {
-                        j++;
-                    }
-                    break;
+            int nextI = i + direction[currentDirection][0];
+            int nextJ = j + direction[currentDirection][1];
+            if (nextI > bottom || nextI < top || nextJ > right || nextJ < left) {
+                if (currentDirection == 0) {
+                    top++;
+                } else if (currentDirection == 1) {
+                    right--;
+                } else if (currentDirection == 2) {
+                    bottom--;
+                } else if (currentDirection == 3) {
+                    left++;
                 }
-                case 1: {
-                    if (i == bottom) {
-                        direction = 2;
-                        right--;
-                        j--;
-                    } else {
-                        i++;
-                    }
-                    break;
-                }
-                case 2: {
-                    if (j == left) {
-                        direction = 3;
-                        bottom--;
-                        i--;
-                    } else {
-                        j--;
-                    }
-                    break;
-                }
-                case 3: {
-                    if (i == top) {
-                        direction = 0;
-                        left++;
-                        j++;
-                    } else {
-                        i--;
-                    }
-                    break;
-                }
+                currentDirection = (currentDirection + 1) % direction.length;
+                nextI = i + step * direction[currentDirection][0];
+                nextJ = j + step * direction[currentDirection][1];
             }
+            i = nextI;
+            j = nextJ;
         }
         return res;
     }
