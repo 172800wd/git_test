@@ -166,30 +166,20 @@ public class Exercise {
         if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) {
             return;
         }
-        int top = 0;
-        int bottom = matrix.length - 1;
-        int left = 0;
-        int right = matrix[0].length - 1;
-        while (left < right && top < bottom) {
-            for (int row = left; row < right; row++) {
-                int temp = matrix[row][right];
-                matrix[row][right] = matrix[top][row];
-                matrix[top][row] = temp;
+        int length = matrix.length;
+        for (int i = 0; i < length / 2; i++) {
+            for (int j = 0; j < length; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[length - 1 - i][j];
+                matrix[length - 1 - i][j] = temp;
             }
-            for (int row = left, i = right; row < right; row++, i--) {
-                int temp = matrix[bottom][i];
-                matrix[bottom][i] = matrix[top][row];
-                matrix[top][row] = temp;
+        }
+        for (int i = 0; i < length; i++) {
+            for (int j = i + 1; j < length; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
             }
-            for (int row = left, i = bottom; row < right; row++, i--) {
-                int temp = matrix[i][left];
-                matrix[i][left] = matrix[top][row];
-                matrix[top][row] = temp;
-            }
-            top++;
-            bottom--;
-            left++;
-            right--;
         }
     }
 
