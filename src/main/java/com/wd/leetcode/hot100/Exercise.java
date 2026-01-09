@@ -162,11 +162,43 @@ public class Exercise {
         return res;
     }
 
+    public static void rotate(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) {
+            return;
+        }
+        int top = 0;
+        int bottom = matrix.length - 1;
+        int left = 0;
+        int right = matrix[0].length - 1;
+        while (left < right && top < bottom) {
+            for (int row = left; row < right; row++) {
+                int temp = matrix[row][right];
+                matrix[row][right] = matrix[top][row];
+                matrix[top][row] = temp;
+            }
+            for (int row = left, i = right; row < right; row++, i--) {
+                int temp = matrix[bottom][i];
+                matrix[bottom][i] = matrix[top][row];
+                matrix[top][row] = temp;
+            }
+            for (int row = left, i = bottom; row < right; row++, i--) {
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[top][row];
+                matrix[top][row] = temp;
+            }
+            top++;
+            bottom--;
+            left++;
+            right--;
+        }
+    }
+
     public static void main(String[] args) {
-        List<Integer> list = spiralOrder(new int[][]{
-                {0, 1, 2, 0},
-                {3, 4, 5, 6},
-                {7, 8, 9, 1}
+        rotate(new int[][]{
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
         });
         System.out.println();
     }
