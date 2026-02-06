@@ -168,17 +168,12 @@ public class Exercise {
         }
         int length = matrix.length;
         for (int i = 0; i < length / 2; i++) {
-            for (int j = 0; j < length; j++) {
+            for (int j = 0; j < (length + 1) / 2; j++) {
                 int temp = matrix[i][j];
-                matrix[i][j] = matrix[length - 1 - i][j];
-                matrix[length - 1 - i][j] = temp;
-            }
-        }
-        for (int i = 0; i < length; i++) {
-            for (int j = i + 1; j < length; j++) {
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = temp;
+                matrix[i][j] = matrix[length - 1 - j][i];
+                matrix[length - 1 - j][i] = matrix[length - 1 - i][length - 1 - j];
+                matrix[length - 1 - i][length - 1 - j] = matrix[j][length - 1 - i];
+                matrix[j][length - 1 - i] = temp;
             }
         }
     }
